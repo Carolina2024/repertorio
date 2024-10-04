@@ -19,3 +19,10 @@ app.get("/canciones", (req, res) => {
   res.json(canciones);
 });
 
+app.post("/canciones", (req, res) => {
+  const rep = req.body;
+  const repertorio = JSON.parse(fs.readFileSync("repertorio.json"));
+  repertorio.push(rep);
+  fs.writeFileSync("repertorio.json", JSON.stringify(repertorio));
+  res.send("Cancion agregada con Exito!!");
+});
